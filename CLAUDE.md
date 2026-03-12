@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-基于 CrewAI 框架的内容创作智能体团队。三个 Agent（研究员 → 作家 → 编辑）以顺序流水线方式协作，将一个主题转化为一篇完整文章。支持 OpenAI / Anthropic Claude / DeepSeek / Ollama 本地模型。
+基于 CrewAI 框架的内容创作智能体团队。三个 Agent（研究员 → 作家 → 编辑）以顺序流水线方式协作，将一个主题转化为一篇完整文章。当前使用阿里云 DashScope（通义千问）作为 LLM 后端。
 
 ## Commands
 
@@ -12,23 +12,24 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 # 安装依赖
 uv pip install "crewai[tools]" python-dotenv
 
-# 运行（交互式选择模型和主题）
-.venv/bin/python main.py
+# 运行（交互式输入主题）
+python main.py
 ```
 
-运行前需在 `.env` 中配置对应模型的 API Key（如 `OPENAI_API_KEY`、`ANTHROPIC_API_KEY`、`DEEPSEEK_API_KEY`）。
+运行前需在 `.env` 中配置：
+- `DASHSCOPE_API_KEY` — 阿里云 DashScope API Key
+- `DASHSCOPE_API_BASE_URL` — API 地址（默认 `https://dashscope.aliyuncs.com/compatible-mode/v1`）
 
 ## Architecture
 
 `main.py` 是唯一的源文件，包含所有逻辑：
 
-- **`AVAILABLE_MODELS`**: 模型注册表，定义所有可选的 LLM（model_id → 显示名称）
-- **`choose_llm()`**: 交互式模型选择，根据 provider 自动处理特殊参数（Anthropic 的 max_tokens、Ollama 的 base_url）
-- **`build_agents(llm)`**: 接收 LLM 实例，构建三个 Agent（researcher / writer / editor）
-- **`build_tasks(topic, ...)`**: 根据主题动态构建三个 Task，形成顺序依赖链
+- **`llm`**: 全局 LLM 实例，使用 DashScope qwen-plus 模型
+- **`build_agents(llm)`**: 构建三个 Agent（researcher / writer / editor）
+- **`build_tasks(topic, ...)`**: 根据主题构建三个 Task，形成顺序依赖链
 - **`create_crew(topic, llm)`**: 组装 Crew，使用 `Process.sequential` 确保任务按序执行
 
-数据流: 选择模型 → 输入主题 → research_task → write_task → edit_task → 最终文章输出
+数据流: 输入主题 → research_task → write_task → edit_task → 最终文章输出
 
 ## Key Conventions
 
@@ -36,4 +37,3 @@ uv pip install "crewai[tools]" python-dotenv
 - Agent 的 `allow_delegation=False` 防止任务在 Agent 间互相委派
 - 所有 Agent prompt 使用中文，生成中文内容
 - 环境变量通过 `python-dotenv` 从 `.env` 加载
-- 模型标识符需带 provider 前缀（如 `openai/gpt-4o`、`anthropic/claude-sonnet-4-20250514`）
