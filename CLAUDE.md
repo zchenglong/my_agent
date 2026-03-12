@@ -24,12 +24,15 @@ python main.py
 
 `main.py` 是唯一的源文件，包含所有逻辑：
 
-- **`llm`**: 全局 LLM 实例，使用 DashScope qwen-plus 模型
+- **`QwenLLM`**: 继承 `BaseLLM` 的自定义千问 LLM 实现，通过 OpenAI SDK 调用 DashScope 兼容接口，实现了 `call()` 抽象方法
+- **`default_llm`**: CrewAI 内置 `LLM` 工厂类实例（走 LiteLLM / 原生 provider 路由）
+- **`qwen_llm`**: 自定义 `QwenLLM` 实例
+- **`choose_llm()`**: 交互式选择使用哪种 LLM 实现
 - **`build_agents(llm)`**: 构建三个 Agent（researcher / writer / editor）
 - **`build_tasks(topic, ...)`**: 根据主题构建三个 Task，形成顺序依赖链
 - **`create_crew(topic, llm)`**: 组装 Crew，使用 `Process.sequential` 确保任务按序执行
 
-数据流: 输入主题 → research_task → write_task → edit_task → 最终文章输出
+数据流: 选择 LLM → 输入主题 → research_task → write_task → edit_task → 最终文章输出
 
 ## Key Conventions
 

@@ -6,7 +6,21 @@
       "Bash(pip install:*)",
       "Bash(uv venv:*)",
       "Bash(uv pip install:*)",
-      "Bash(.venv/bin/python:*)"
+      "Bash(.venv/bin/python:*)",
+      "Bash(ls:*)",
+      "Bash(/Users/zhangchenglong/work/Github/my_agent/.venv/bin/python:*)",
+      "Bash(/opt/homebrew/bin/python3.12 -c:*)",
+      "Bash(python:*)",
+      "Bash(python3:*)",
+      "Bash(/Users/zhangchenglong/work/Github/my_agent/.venv/bin/python3 -c \"\nimport os\nfrom fpdf import FPDF\n\nfont_path = ''/System/Library/Fonts/STHeiti Light.ttc''\n\npdf = FPDF\\(\\)\npdf.set_auto_page_break\\(auto=True, margin=15\\)\npdf.add_page\\(\\)\npdf.add_font\\(''Chinese'', '''', font_path\\)\npdf.add_font\\(''Chinese'', ''B'', font_path\\)\n\npdf.set_font\\(''Chinese'', ''B'', 20\\)\npdf.multi_cell\\(0, 10, ''测试标题：人工智能''\\)\npdf.ln\\(4\\)\n\npdf.set_font\\(''Chinese'', ''B'', 16\\)\npdf.multi_cell\\(0, 8, ''第一章 概述''\\)\npdf.ln\\(3\\)\n\npdf.set_font\\(''Chinese'', '''', 12\\)\npdf.multi_cell\\(0, 7, ''这是一段中文测试内容，用于验证 PDF 输出是否正常。人工智能在日常生活中的应用越来越广泛，从智能语音助手到自动驾驶汽车，从医疗诊断到金融分析，AI 技术正在深刻改变我们的生活方式。''\\)\n\npdf.output\\(''/tmp/test_chinese_venv.pdf''\\)\nprint\\(''SUCCESS''\\)\nprint\\(f''File size: {os.path.getsize\\(\"\"/tmp/test_chinese_venv.pdf\"\"\\)} bytes''\\)\n\")",
+      "Bash(/Users/zhangchenglong/work/Github/my_agent/.venv/bin/python3:*)",
+      "Bash(/Users/zhangchenglong/work/Github/my_agent/.venv/bin/pip:*)",
+      "Bash(.venv/bin/python3:*)",
+      "Bash(open:*)",
+      "WebFetch(domain:help.aliyun.com)",
+      "WebFetch(domain:dashscope.aliyuncs.com)",
+      "WebSearch",
+      "WebFetch(domain:blog.csdn.net)"
     ]
   }
 }

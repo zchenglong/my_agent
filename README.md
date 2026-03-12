@@ -41,7 +41,16 @@ DASHSCOPE_API_BASE_URL=https://dashscope.aliyuncs.com/compatible-mode/v1
 python main.py
 ```
 
-运行后会提示输入文章主题，留空则使用默认主题「人工智能在日常生活中的应用」。
+运行后会依次提示：
+1. 选择 LLM 实现方式（CrewAI 内置 LLM 或自定义 QwenLLM）
+2. 输入文章主题（留空使用默认主题「人工智能在日常生活中的应用」）
+
+### LLM 实现方式
+
+| 选项 | 说明 |
+|------|------|
+| CrewAI 内置 LLM | 使用 CrewAI 的 `LLM` 工厂类，底层自动路由到对应 provider |
+| 自定义 QwenLLM | 继承 `BaseLLM`，通过 OpenAI SDK 直接调用 DashScope 兼容接口 |
 
 ## 项目结构
 
