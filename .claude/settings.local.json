@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:pypi.org)",
+      "WebFetch(domain:docs.crewai.com)",
+      "Bash(pip install:*)",
+      "Bash(uv venv:*)",
+      "Bash(uv pip install:*)",
+      "Bash(.venv/bin/python:*)"
+    ]
+  }
+}
