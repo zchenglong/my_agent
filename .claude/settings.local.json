@@ -20,7 +20,8 @@
       "WebFetch(domain:help.aliyun.com)",
       "WebFetch(domain:dashscope.aliyuncs.com)",
       "WebSearch",
-      "WebFetch(domain:blog.csdn.net)"
+      "WebFetch(domain:blog.csdn.net)",
+      "Bash(LOG_LEVEL=DEBUG .venv/bin/python3:*)"
     ]
   }
 }
